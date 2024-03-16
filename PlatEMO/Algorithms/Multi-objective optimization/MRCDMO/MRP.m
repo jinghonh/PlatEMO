@@ -1,5 +1,7 @@
-function k = MRP(obj_g,obj_g_1)
+function center_t = MRP(Population,LastPopulation)
 % 划分子区域
+    obj_g=Population.objs;
+    obj_g_1=LastPopulation.objs;
     u=max(obj_g);
     l=min(obj_g);
     delta_f=(obj_g-obj_g_1)./(u-l);
@@ -30,6 +32,12 @@ function k = MRP(obj_g,obj_g_1)
     % end
 
 % 确定进化步长
+    % 确定中心点位置
+    % k个区域有k个中心点，每个中心点为1*N的向量
+    center_t = zeros(k,size(Population,2));
+    for i = 1:k
+        center_t(i,:) = mean(Population(h==i));
+    end
     
 
 end

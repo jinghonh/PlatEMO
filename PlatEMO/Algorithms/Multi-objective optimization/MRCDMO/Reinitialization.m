@@ -1,7 +1,8 @@
-function [Population] = Reinitialization(Problem,Population,LastPopulation)
+function [Population,center] = Reinitialization(Problem,Population,LastPopulation,center)
 % Re-initialize solutions
 
-    MRP(Population.objs,LastPopulation.objs)
+   center_t = MRP(Population,LastPopulation);
+   
 
     
 end

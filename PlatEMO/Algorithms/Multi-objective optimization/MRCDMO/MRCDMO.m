@@ -9,12 +9,12 @@ classdef MRCDMO < ALGORITHM
         function main(Algorithm,Problem)
             %% Generate random population
             Population = Problem.Initialization();
-
+            % center = zeros(1,size(Population));
             %% Optimization
             while Algorithm.NotTerminated(Population)
                 if Changed(Problem,Population)
                     % React to the change
-                    [Population] = Reinitialization(Problem,Population,LastPopulation);
+                    [Population,center] = Reinitialization(Problem,Population,LastPopulation,center);
                 else
                     LastPopulation=Population; %保存上一代的种群
                 end
