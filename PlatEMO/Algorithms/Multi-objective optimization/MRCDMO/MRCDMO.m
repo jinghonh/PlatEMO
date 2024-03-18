@@ -1,5 +1,5 @@
 classdef MRCDMO < ALGORITHM
-% <multi> <real/integer/label/binary/permutation>
+% <multi> <real/integer/label/binary/permutation> <dynamic>
 % Multiregional Co-evolutionary Algorithm
 
 
@@ -9,19 +9,27 @@ classdef MRCDMO < ALGORITHM
         function main(Algorithm,Problem)
             %% Generate random population
             Population = Problem.Initialization();
-            % center = zeros(1,size(Population));
+            PopDec = Population.decs;
+            center = {};
+            obj1=[];
+            obj2=[];
+            Last_T_Population=[];
             %% Optimization
             while Algorithm.NotTerminated(Population)
-                if Changed(Problem,Population)
-                    % React to the change
-                    [Population,center] = Reinitialization(Problem,Population,LastPopulation,center);
-                else
+                obj1 = Problem.CalObj(ones(size(PopDec(1,:))));
+                if isequal(obj1,obj2) ||isempty(obj2)
                     LastPopulation=Population; %保存上一代的种群
+                else % 目标函数发生变化
+                    Problem.DrawObj(Population) 
+                    pause(0.1);
+                    [Population,Last_T_Population,center] = Reinitialization_M(Problem,Population,LastPopulation,Last_T_Population,center);
                 end
+                obj2 = Problem.CalObj(ones(size(PopDec(1,:))));
+
                 % Generate offspring randomly
                 MatingPool = randperm(Problem.N);
                 Offspring  = OperatorGA(Problem,Population(MatingPool));
-
+                
                 % Elitism strategy
                 UniPop = [Population,Offspring];
                 PopObj = UniPop.objs;
@@ -50,6 +58,10 @@ classdef MRCDMO < ALGORITHM
                     reference_population = [];
                 end
                 Population = UniPop([pareto_population,reference_population]);
+                Population = Problem.SetAdd(Population);
+                % PopObj=Population.objs;
+                % scatter3(PopObj(:,1),PopObj(:,2),PopObj(:,3));
+                % pause(0.5)
             end
         end
     end

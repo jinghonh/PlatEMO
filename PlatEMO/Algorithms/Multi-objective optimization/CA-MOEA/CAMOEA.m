@@ -56,6 +56,7 @@ classdef CAMOEA < ALGORITHM
                     reference_population = [];
                 end
                 Population = UniPop([pareto_population,reference_population]);
+                Problem.DrawObj(Population) 
             end
         end
     end

@@ -44,6 +44,7 @@ classdef FDA1 < PROBLEM
         function PopObj = CalObj(obj,PopDec)
             PopObj(:,1) = PopDec(:,1); 
             t = floor(obj.FE/obj.N/obj.taut)/obj.nt;
+            disp(t)
             g = 1 + sum((PopDec(:,2:end)-sin(0.5.*pi.*t)).^2,2);
             h = 1 - sqrt(PopObj(:,1)./g);
             PopObj(:,2) = g.*h;

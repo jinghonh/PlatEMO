@@ -38,6 +38,7 @@ classdef DNSGAII < ALGORITHM
                     AllPop = [AllPop,Population];
                     % React to the change
                     [Population,FrontNo,CrowdDis] = Reinitialization(Problem,Population,type,zeta);
+                    Problem.DrawObj(Population) 
                 end
                 MatingPool = TournamentSelection(2,Problem.N,FrontNo,-CrowdDis);
                 Offspring  = OperatorGA(Problem,Population(MatingPool));

@@ -15,7 +15,7 @@ function Population = FIP_IPG(Problem,PopDec)
     [Fx,~] = NDSort(X.objs,X.cons,Problem.N);
     [Fy,~] = NDSort(Y.objs,Y.cons,Problem.N);
     [acc,acc_ite,A]=JDA(X.objs,Fx',Y.objs,Fy',options);
-
+    
 
 end
 
