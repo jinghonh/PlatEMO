@@ -2,7 +2,7 @@ function models = TrainModel(tr_x, tr_y, index, str, M, D)
 % Train the heterogeneous ensemble Model
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2023 BIMK Group. You are free to use the PlatEMO for
+% Copyright (c) 2024 BIMK Group. You are free to use the PlatEMO for
 % research purposes. All publications which use this platform or any code
 % in the platform should acknowledge the use of "PlatEMO" and reference "Ye
 % Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform
@@ -73,7 +73,7 @@ function [Centers, Spreads, W2, B2]=clusterRBF(SamIn, SamOut, ClusterNum)
             IndexInClusters = zeros(ClusterNum,SamNum); % Index of samples in each class?
             % Classify all samples by the least distance principle?
             for i = 1:SamNum
-                AllDistance = dist(Centers,SamIn(i,:)');% Calculate the distance between the i-th solution and each clustering center¦»
+                AllDistance = dist(Centers,SamIn(i,:)');% Calculate the distance between the i-th solution and each clustering center??
                 [~,Pos] = min(AllDistance);   % Minimum distance,training input is the index of clustering center
                 NumberInClusters(Pos) = NumberInClusters(Pos) + 1;
                 IndexInClusters(Pos,NumberInClusters(Pos)) = i;% Stores the training indexes belonging to this class in turn
