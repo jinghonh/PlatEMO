@@ -331,6 +331,11 @@ classdef PROBLEM < handle & matlab.mixin.Heterogeneous
                 end
             end
         end
+        function Population=SetAdd(obj,Population)
+            for i=1:obj.N
+                Population(i).add=obj.FE;
+            end
+        end
     end
 	methods(Access = protected, Sealed)
         function varargout = ParameterSet(obj,varargin)
